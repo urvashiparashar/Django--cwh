@@ -2,27 +2,19 @@
 #code for video 6
 from django.http import HttpResponse
 from django.shortcuts import render
-# def index(request):
-#     return HttpResponse('''<h1>hello</h1>
-#     <a href="https://www.google.com/">Django Code with harry</a>''')
-# def about(request):
-#     return HttpResponse("about page")
-
 #code for video 7
 def index(request):
-    # return HttpResponse("Home")
-    #dictonary
-    # params={'name':'Harry','place':'USA'}
+    
     return render(request,'index.html')
 #navigation tab
-def ex1(request):
-    s='''<h2>Navigation Bar</h2>
-    <a href="https://www.youtube.com/">Django with harry</a><br>
-    <a href=https://www.facebook.com/">Facebook</a><br>
-    <a href=https://www.flipkart.com/">FlipKart</a><br>
-    <a href=https://www.hindustan.com/">News</a><br>
-    <a href=https://www.google.com/>Google</a><br>'''
-    return HttpResponse(s)
+# def ex1(request):
+#     s='''<h2>Navigation Bar</h2>
+#     <a href="https://www.youtube.com/">Django with harry</a><br>
+#     <a href=https://www.facebook.com/">Facebook</a><br>
+#     <a href=https://www.flipkart.com/">FlipKart</a><br>
+#     <a href=https://www.hindustan.com/">News</a><br>
+#     <a href=https://www.google.com/>Google</a><br>'''
+#     return HttpResponse(s)
 def analyze(request):
     #get text
     #ste check box values
@@ -32,9 +24,7 @@ def analyze(request):
     fullcaps=request.POST.get('fullcaps','off')
     newlineremove=request.POST.get('newlineremove','off')
     extraspaceremover=request.POST.get('extraspaceremover','off')
-    # print(removepunc)
-    # print(djtext)
-    #check checkbox value
+    
     if removepunc=="on":
        punctuations='''!()-{}[];:'",.\/<>?#@$&*%_~'''
        analyzed = ""
@@ -51,14 +41,6 @@ def analyze(request):
         params = {'purpose': 'uppercase', 'analyzed_text': analyzed}
         djtext=analyzed
         # return render(request, 'analyze.html', params)
-    if(newlineremove=="on"):
-        analyzed = ""
-        for char in djtext:
-            if char!="\n" and char!="\r":
-             analyzed = analyzed + char.upper()
-        params = {'purpose': 'Remove new line', 'analyzed_text': analyzed}
-        djtext=analyzed
-        # return render(request, 'analyze.html', params)
     if(extraspaceremover=="on"):
         analyzed = ""
         for index,char in enumerate(djtext):
@@ -67,8 +49,19 @@ def analyze(request):
         params = {'purpose': 'Remove extra space', 'analyzed_text': analyzed}
         return render(request, 'analyze.html', params)
 
-    # else :
-    #     return HttpResponse("error")
+    if(newlineremove=="on"):
+        analyzed = ""
+        for char in djtext:
+            if char!="\n" and char!="\r":
+             analyzed = analyzed + char
+            else:
+                print("no")
+        print("pre",analyzed)  
+        params = {'purpose': 'Remove new line', 'analyzed_text': analyzed}
+    if(removepunc!="on" and newlineremove!="on" and extraspaceremover!="on" and fullcaps!="on"):
+        return HttpResponse("Please select any operation and try again")
+
+        
     return render(request, 'analyze.html', params)
 
 # def capitalize(request):

@@ -17,24 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from . import  views
 
-
-#code for video 6
-# urlpatterns = [
-#     path('admin/', admin.site.urls),
-#     path('',views.index,name='index'),
-#     path('about/',views.about,name='about'),
-# ]
-
 #code for video 7
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index,name='index'),
-    # path('removepunc',views.removepunc,name='rempun'),
-    # path('capitalize',views.capitalize,name='capitalize first'),
-    # path('newlineremove',views.newlineremove,name='newlineremove'),
-    # path('spaceremove',views.spaceremove,name='spaceremove'),
-    # path('charcount',views.charcount,name='charcount'),
+    
     path('analyze',views.analyze,name='analyze'),
-    path('ex1',views.ex1,name='ex1'),
+   
 ]
 
